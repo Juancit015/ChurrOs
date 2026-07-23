@@ -1,31 +1,31 @@
 <!doctype html>
-<html lang="en" class="2xl:text-xl">
+<html lang="es" class="2xl:text-xl" style="scroll-behavior: smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content="Astro v6.0.5" />
     <meta name="darkreader-lock" />
-    <title>Descargar ChurrOS — Linux colombiano ligero</title>
+    <title>ChurrOS — Linux colombiano ligero para todos — ChurrOS</title>
     <meta
       name="description"
       content="🚀 ChurrOS es una distribución Linux colombiana optimizada para equipos con recursos limitados, combinando rendimiento, sencillez y sabor latino."
     />
     <meta name="robots" content="index,follow" />
-    <link rel="canonical" href="download.html" />
+    <link rel="canonical" href="index.html" />
     <meta property="og:title" content="ChurrOS — Linux con sabor colombiano" />
     <meta
       property="og:description"
       content="🚀 ChurrOS es una distribución Linux colombiana optimizada para equipos con recursos limitados, combinando rendimiento, sencillez y sabor latino."
     />
-    <meta property="og:url" content="index.htmldownload" />
+    <meta property="og:url" content="index.html" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="index.html_astro/default.DKkLOjN7_Z1uddFL.webp" />
+    <meta property="og:image" content="_astro/default.DKkLOjN7_Z1uddFL.webp" />
     <meta property="og:image:alt" content="ChurrOS — Linux con sabor colombiano" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="alternate icon" href="favicon.ico" type="image/x-icon" />
     <link rel="mask-icon" href="favicon.svg" color="#f97316" />
     <link rel="sitemap" href="sitemap-index.xml" />
     <meta name="astro-view-transitions-enabled" content="true" />
@@ -41,6 +41,14 @@
           color 0.3s ease,
           border-color 0.3s ease,
           box-shadow 0.3s ease !important;
+      }
+    </style>
+    <style>
+      .dark {
+        --color-dark-base: #0f0802;
+        --color-dark-surface: #1a0f04;
+        --color-dark-elevated: #241508;
+        --color-dark-text: #f5e6d0;
       }
     </style>
 
@@ -187,7 +195,7 @@
                   class="hover:text-gray-900 dark:hover:text-white px-4 py-3 md:px-0 md:py-0 flex items-center transition duration-150 ease-in-out hover:underline underline-offset-2"
                   href="download.html"
                 >
-                  Download
+                  Descargar
                 </a>
               </li>
               <li>
@@ -195,7 +203,7 @@
                   class="hover:text-gray-900 dark:hover:text-white px-4 py-3 md:px-0 md:py-0 flex items-center transition duration-150 ease-in-out hover:underline underline-offset-2"
                   href="about.html"
                 >
-                  About
+                  Acerca de
                 </a>
               </li>
               <li>
@@ -209,7 +217,7 @@
               <li class="md:hidden">
                 <a
                   class="font-bold hover:text-gray-900 dark:hover:text-white px-4 py-3 flex items-center transition duration-150 ease-in-out"
-                  href="https://github.com/churros"
+                  href="https://github.com/Hoyuse/ChurrOS/releases/tag/v0.1.1"
                 >
                   Github
                 </a>
@@ -228,7 +236,8 @@
                   </svg>
                 </button>
                 <a
-                  href="https://github.com/churros"
+                  href="https://github.com/Hoyuse/ChurrOS/releases/tag/v0.1.1"
+                  target="_blank"
                   class="inline-block text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-hidden focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
                   aria-label="ChurrOS Github"
                 >
@@ -276,8 +285,8 @@
               y2="474.645"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#8B5CF6"></stop>
-              <stop offset="1" stop-color="#2DD4BF"></stop>
+              <stop stop-color="#f97316"></stop>
+              <stop offset="1" stop-color="#c2410c"></stop>
             </linearGradient>
           </defs>
         </svg>
@@ -285,9 +294,9 @@
       <section class="pt-12 md:pt-24 pb-20 md:pb-52">
         <div class="mx-auto max-w-6xl px-3 md:px-6">
           <div class="flex flex-wrap md:flex-nowrap items-center md:space-x-10 aos aos-delay-1">
-            <div class="w-full md:w-1/2">
+            <div class="w-full md:w-1/2 mb-8 md:mb-0">
               <h2
-                class="mb-9 text-4xl md:text-6xl xl:text-8xl font-bold font-heading leading-none text-nowrap lg:text-wrap md:max-w-md"
+                class="mb-9 text-4xl md:text-6xl xl:text-8xl font-bold font-heading leading-none text-nowrap lg:text-wrap md:max-w-md dark:text-white"
               >
                 Niri Edition
               </h2>
@@ -323,7 +332,7 @@
               <img
                 src="_astro/hero.churros.jpg"
                 alt="Niri Edition"
-                class="rounded-xl shadow aos aos-delay-2"
+                class="rounded-xl shadow dark:shadow-gray-900/50 aos aos-delay-2"
                 loading="eager"
               />
             </div>
@@ -353,37 +362,37 @@
                 <button
                   class="text-muted hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out mr-2 rtl:mr-0 rtl:ml-2"
                 >
-                  Legal Notice
+                  Aviso legal
                 </button>
                 <!--astro:end-->
               </astro-island>
             </div>
           </div>
           <div class="col-span-6 md:col-span-3 lg:col-span-2">
-            <div class="dark:text-gray-300 font-medium mb-2">Product</div>
+            <div class="dark:text-gray-300 font-medium mb-2">Producto</div>
             <ul class="text-sm">
               <li class="mb-2">
                 <a
                   class="text-muted hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out mr-2 rtl:mr-0 rtl:ml-2"
                   href="about.html#team"
                 >
-                  Team
+                  Equipo
                 </a>
               </li>
             </ul>
           </div>
           <div class="col-span-6 md:col-span-3 lg:col-span-2">
-            <div class="dark:text-gray-300 font-medium mb-2">Support</div>
+            <div class="dark:text-gray-300 font-medium mb-2">Soporte</div>
           </div>
           <div class="col-span-6 md:col-span-3 lg:col-span-2">
-            <div class="dark:text-gray-300 font-medium mb-2">Distribution</div>
+            <div class="dark:text-gray-300 font-medium mb-2">Distribución</div>
             <ul class="text-sm">
               <li class="mb-2">
                 <a
                   class="text-muted hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out mr-2 rtl:mr-0 rtl:ml-2"
                   href="about.html#distribution"
                 >
-                  About
+                  Acerca de
                 </a>
               </li>
             </ul>
@@ -573,7 +582,13 @@
             </li>
           </ul>
           <div class="text-sm mr-4 dark:text-gray-300">
-            <img src="_astro/logo.churros.png" alt="" width="20" height="20" class="w-5 h-5 md:w-6 md:h-6 md:-mt-0.5 mr-1.5 rtl:mr-0 rtl:ml-1.5 float-left rtl:float-right rounded-xs">
+            <img
+              src="_astro/logo.churros.png"
+              alt=""
+              width="20"
+              height="20"
+              class="w-5 h-5 md:w-6 md:h-6 md:-mt-0.5 mr-1.5 rtl:mr-0 rtl:ml-1.5 float-left rtl:float-right rounded-xs"
+            />
             Hecho por
             <a
               class="text-primary-700 dark:text-primary-300 font-bold underline underline-offset-2 decoration-2"
