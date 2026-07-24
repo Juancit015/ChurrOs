@@ -726,15 +726,18 @@
           }
           applyHeaderStylesOnScroll();
 
-          attachEvent([document], "scroll", () => {
-            lastKnownScrollPosition = window.scrollY;
-            if (!ticking) {
-              window.requestAnimationFrame(() => {
-                applyHeaderStylesOnScroll();
-              });
-              ticking = true;
-            }
-          });
+          if (!window.churrosScrollListenerAttached) {
+            attachEvent([document], "scroll", () => {
+              lastKnownScrollPosition = window.scrollY;
+              if (!ticking) {
+                window.requestAnimationFrame(() => {
+                  applyHeaderStylesOnScroll();
+                });
+                ticking = true;
+              }
+            });
+            window.churrosScrollListenerAttached = true;
+          }
 
           const aosElements = document.querySelectorAll(".aos, .aos-fade");
           if (aosElements.length) {
@@ -760,11 +763,8 @@
           document.querySelector("#header nav")?.classList.add("hidden");
         }
 
-        if (document.readyState === "loading") {
-          document.addEventListener("DOMContentLoaded", initUI);
-        } else {
-          initUI();
-        }
+        document.addEventListener("astro:page-load", initUI);
+        document.addEventListener("astro:after-swap", setThemeMode);
       })();
     </script>
   </body>
