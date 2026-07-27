@@ -30,29 +30,12 @@
     });
   });
 
-  function attachEvent(selector, event, fn) {
-    const matches = typeof selector === "string" ? document.querySelectorAll(selector) : selector;
-    if (matches && matches.length) {
-      matches.forEach((elem) => {
-        elem.addEventListener(event, (e) => fn(e, elem), false);
-      });
-    }
-  }
-
   function initUI() {
-    attachEvent("[data-aw-toggle-menu]", "click", (_, elem) => {
-      elem.classList.toggle("expanded");
-      document.body.classList.toggle("overflow-hidden");
-      document.getElementById("header")?.classList.toggle("h-screen");
-      document.getElementById("gradient")?.classList.toggle("hidden");
-      document.querySelector("#header nav")?.classList.toggle("hidden");
-    });
-
-    attachEvent("[data-aw-toggle-color-scheme]", "click", () => {
-      if (defaultTheme.endsWith(":only")) return;
-      document.documentElement.classList.toggle("dark");
-      localStorage.theme = document.documentElement.classList.contains("dark") ? "dark" : "light";
-    });
+    document.querySelector("#header nav")?.classList.add("hidden");
+    const menuBtn = document.querySelector("[data-aw-toggle-menu]");
+    if (menuBtn) menuBtn.classList.remove("expanded");
+    document.body.classList.remove("overflow-hidden");
+    document.getElementById("header")?.classList.remove("h-screen");
 
     let ticking = false;
     let lastKnownScrollPosition = window.scrollY;
@@ -69,20 +52,32 @@
     }
 
     applyHeaderStylesOnScroll();
+  }
 
-    if (!window.churrosScrollListenerAttached) {
-      attachEvent([document], "scroll", () => {
-        lastKnownScrollPosition = window.scrollY;
-        if (!ticking) {
-          window.requestAnimationFrame(() => {
-            applyHeaderStylesOnScroll();
-          });
-          ticking = true;
-        }
-      });
-      window.churrosScrollListenerAttached = true;
-    }
+  function initScrollListener() {
+    if (window.churrosScrollListenerAttached) return;
+    let ticking = false;
+    let lastKnownScrollPosition = window.scrollY;
+    document.addEventListener("scroll", () => {
+      lastKnownScrollPosition = window.scrollY;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const header = document.getElementById("header");
+          if (!header) return;
+          if (lastKnownScrollPosition > 60 && !header.classList.contains("scroll")) {
+            header.classList.add("scroll");
+          } else if (lastKnownScrollPosition <= 60 && header.classList.contains("scroll")) {
+            header.classList.remove("scroll");
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+    window.churrosScrollListenerAttached = true;
+  }
 
+  function initAOS() {
     const aosElements = document.querySelectorAll(".aos, .aos-fade");
     if (aosElements.length) {
       const observer = new IntersectionObserver(
@@ -98,22 +93,37 @@
       );
       aosElements.forEach((el) => observer.observe(el));
     }
-
-    const menuBtn = document.querySelector("[data-aw-toggle-menu]");
-    if (menuBtn) {
-      menuBtn.classList.remove("expanded");
-    }
-    document.body.classList.remove("overflow-hidden");
-    document.getElementById("header")?.classList.remove("h-screen");
-    document.querySelector("#header nav")?.classList.add("hidden");
   }
 
-  document.addEventListener("astro:page-load", initUI);
-  document.addEventListener("astro:after-swap", setThemeMode);
+  document.addEventListener("click", (e) => {
+    const menuBtn = e.target.closest("[data-aw-toggle-menu]");
+    if (menuBtn) {
+      menuBtn.classList.toggle("expanded");
+      document.body.classList.toggle("overflow-hidden");
+      document.getElementById("header")?.classList.toggle("h-screen");
+      document.getElementById("gradient")?.classList.toggle("hidden");
+      document.querySelector("#header nav")?.classList.toggle("hidden");
+      return;
+    }
+
+    const themeBtn = e.target.closest("[data-aw-toggle-color-scheme]");
+    if (themeBtn) {
+      if (defaultTheme.endsWith(":only")) return;
+      document.documentElement.classList.toggle("dark");
+      localStorage.theme = document.documentElement.classList.contains("dark") ? "dark" : "light";
+      return;
+    }
+  });
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initUI);
+    document.addEventListener("DOMContentLoaded", () => {
+      initUI();
+      initScrollListener();
+      initAOS();
+    });
   } else {
     initUI();
+    initScrollListener();
+    initAOS();
   }
 })();
