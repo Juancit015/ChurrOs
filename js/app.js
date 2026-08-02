@@ -95,6 +95,41 @@
     }
   }
 
+  function openExternalLinksInNewTab() {
+    document.querySelectorAll("a[href]").forEach((link) => {
+      const href = link.getAttribute("href");
+      if (!href) return;
+
+      let isExternal = false;
+      try {
+        if (href.startsWith("http://") || href.startsWith("https://") || href.startsWith("//")) {
+          const url = new URL(href, window.location.href);
+          const currentHost = window.location.hostname;
+
+          if (currentHost && currentHost !== "localhost" && currentHost !== "127.0.0.1" && currentHost !== "") {
+            isExternal = url.hostname !== currentHost;
+          } else {
+            isExternal = url.hostname !== "churroslinux.org" && url.hostname !== "www.churroslinux.org";
+          }
+        }
+      } catch (e) {
+        isExternal = false;
+      }
+
+      if (isExternal) {
+        link.setAttribute("target", "_blank");
+        const relParts = new Set((link.getAttribute("rel") || "").split(/\s+/).filter(Boolean));
+        relParts.add("noopener");
+        relParts.add("noreferrer");
+        link.setAttribute("rel", [...relParts].join(" "));
+      } else {
+        if (link.getAttribute("target") === "_blank") {
+          link.removeAttribute("target");
+        }
+      }
+    });
+  }
+
   document.addEventListener("click", (e) => {
     const menuBtn = e.target.closest("[data-aw-toggle-menu]");
     if (menuBtn) {
@@ -120,10 +155,12 @@
       initUI();
       initScrollListener();
       initAOS();
+      openExternalLinksInNewTab();
     });
   } else {
     initUI();
     initScrollListener();
     initAOS();
+    openExternalLinksInNewTab();
   }
 })();
